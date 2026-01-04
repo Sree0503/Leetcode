@@ -1,0 +1,27 @@
+// PROBLEM OF THE DAY: Largest Even Number (Weekly Contest 483)
+
+// PROBLEM LINK: https://leetcode.com/contest/weekly-contest-483/problems/largest-even-number/
+
+ // APPROACH:
+        // 1. We need the largest possible even integer that can be obtained by deleting zero or            more characters from the string.
+        // 2. An even number must end with an even digit.
+        // 3. To maximize the number, we scan the string from right to left to find the rightmost           even digit.
+        // 4. Once found, the substring from index 0 to that position forms the largest possible            even number.
+        // 5. If no even digit exists, return an empty string.
+
+// SPACE COMPLEXITY: O(N)
+
+// TIME COMPLEXITY: O(N)
+
+class Solution {
+public:
+    string largestEven(string s) {
+        int n = s.size();
+        for(int i = n - 1; i  >= 0; i--) {
+            if(s[i] % 2 == 0) {
+                return s.substr(0, i+1);
+            }
+        }
+        return "";
+    }
+};©leetcode
