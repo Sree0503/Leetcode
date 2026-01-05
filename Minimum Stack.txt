@@ -1,0 +1,49 @@
+// PROBLEM OF THE DAY: Minimum Stack
+
+// PROBLEM LINK: https://leetcode.com/problems/min-stack/description/
+
+// APPROACH:
+    // 1. I used two stacks:
+    //    - One stack (s) to store all the elements
+    //    - Another stack (min_s) to keep track of the minimum element at each level
+    // 2. In the push operation, the value is pushed into the main stack.
+    //    If the min stack is empty or the value is smaller than or equal to the current minimum,
+    //    it is also pushed into the min stack.
+    // 3. In the pop operation, if the top of the main stack is equal to the top of the min stack,
+    //    the min stack is also popped to maintain consistency.
+    // 4. The top operation simply returns the top element of the main stack.
+    // 5. The getMin operation returns the top of the min stack, which always holds the current minimum.
+
+// SPACE COMPLEXITY: O(N)
+
+// TIME COMPLEXITY: O(1) 
+class MinStack {
+public:
+    int min_val = INT_MAX;
+    stack<int> s;
+    stack<int> min_s; 
+    MinStack() {
+    }
+    
+    void push(int val) {
+        s.push(val);
+        if (min_s.empty() || val <= min_s.top()) {
+            min_s.push(val);
+        }
+    }
+    
+    void pop() {
+        if(!min_s.empty() && s.top() == min_s.top()) {
+            min_s.pop();
+        }
+        if(!s.empty()) s.pop();
+    }
+    
+    int top() {
+        return s.top();
+    }
+    
+    int getMin() {
+        return min_s.top();
+    }
+};
