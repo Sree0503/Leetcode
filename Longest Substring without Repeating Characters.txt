@@ -1,0 +1,37 @@
+// PROBLEM OF THE DAY: Longest Substring without Repeating Characters
+
+// APPROACH:
+    // 1. The goal is to find the length of the longest substring without repeating characters.
+    // 2. I used a sliding window technique with two pointers (i and j) starting from index 0.
+    // 3. A Map is used to store the frequency of characters in the current window.
+    // 4. I expand the window using pointer j and add characters to the map until a duplicate character is found.
+    // 5. When a duplicate is found, I shrink the window from the left using pointer i and decrement the frequency
+    //    of characters until the duplicate is removed from the window.
+    // 6. During expansion, I update the maximum length of the substring.
+    // 7. Finally, I return the maximum length.
+
+// TIME COMPLEXITY: O(N log N)
+
+// SPACE COMPLEXITY: O(1) 
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n=s.size();
+        int max_len=0;
+        int i=0;
+        int j=0;
+        map<char,int>mpp;
+        while(j<n){
+            if(mpp[s[j]]==0){
+                mpp[s[j]]++;
+                max_len= max(max_len, j-i+1);
+                j++;
+            } else {
+               mpp[s[i]]--;
+               i++;
+            }
+        }
+        return max_len;
+    }
+};
