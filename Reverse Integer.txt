@@ -1,0 +1,29 @@
+// PROBLEM OF THE DAY: Reverse Integer
+
+// APPROACH:
+    // 1. We are given an integer x and need to reverse its digits. If the reversed number goes outside the signed 32-bit integer range [-2 ** 31, ( 2 ** 31) -1], we return zero.
+    // 2. Initialize rev = 0 to store the reversed number.
+    // 3. Loop while x is not equal to 0.
+    // 4. Extract the last digit of x using x % 10.
+    // 5. Append this digit to rev by multiplying rev by 10 and adding the digit.
+    // 6. Remove the last digit of x using integer division: x /= 10.
+    // 7. After the loop, check whether rev lies within the 32-bit signed integer range.
+    // 8. Return rev if valid; otherwise, return 0.
+
+// TIME COMPLEXITY: O(log N)
+
+// SPACE COMPLEXITY: O(1)
+
+
+class Solution {
+public:
+    int reverse(int x) {
+        long long int reversed_x = 0;
+        while(x) {
+            int digit = x % 10;
+            reversed_x = (reversed_x * 10) + digit;
+            x /= 10;
+        }
+        return (reversed_x > INT_MAX || reversed_x < INT_MIN ? 0 : reversed_x);
+    }
+};
