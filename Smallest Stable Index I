@@ -1,0 +1,22 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var firstStableIndex = function(nums, k) {
+    let n = nums.length;
+    let max_elem = -Infinity;
+    let min_elem = nums[n - 1];
+    let result = 0;
+    let prefix_min = new Array(n).fill(0);
+    prefix_min[n - 1] = nums[n - 1]
+    for(let i = n - 2; i >= 0; i--) { 
+        min_elem = Math.min(min_elem, nums[i]);
+        prefix_min[i] = min_elem;
+    }
+    for(let i = 0; i < n; i++) {
+        max_elem = Math.max(max_elem, nums[i]);
+        if((max_elem - prefix_min[i]) <= k) return i;
+    }
+    return -1; 
+};
